@@ -1,0 +1,370 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    ANDAND
+    ARRAY
+    ARROW
+    BREAK
+    CATCH
+    CLASS
+    COLON
+    COMMA
+    CONTINUE
+    DIVIDEEQUAL
+    DOT
+    ECHO
+    FLOAT
+    FOR
+    FOREACH
+    FUNCTION
+    GREATER
+    GREATEREQUAL
+    LBRACE
+    LBRACKET
+    LESS
+    LESSEQUAL
+    MINUSEQUAL
+    MINUSMINUS
+    MULTI_LINE_COMMENT
+    NEW
+    NOT
+    NOTEQUAL
+    OR
+    OROR
+    PLUSEQUAL
+    PLUSPLUS
+    PRINT
+    PRIVATE
+    PROTECTED
+    PUBLIC
+    QUESTION
+    RBRACE
+    RBRACKET
+    RETURN
+    SEMICOLON
+    SINGLE_LINE_COMMENT
+    STATIC
+    STRING
+    THROW
+    TIMESEQUAL
+    TRY
+    VAR
+    WHILE
+
+Grammar
+
+Rule 0     S' -> assignment
+Rule 1     assignment -> IDENTIFIER EQUALS expression
+Rule 2     expression -> expression PLUS expression
+Rule 3     expression -> expression MINUS expression
+Rule 4     expression -> expression TIMES expression
+Rule 5     expression -> expression DIVIDE expression
+Rule 6     expression -> NUMBER
+Rule 7     if_else -> IF LPAREN expression RPAREN statement ELSE statement
+Rule 8     statement -> assignment
+Rule 9     statement -> if_else
+Rule 10    statement -> expression
+
+Terminals, with rules where they appear
+
+AND                  : 
+ANDAND               : 
+ARRAY                : 
+ARROW                : 
+BREAK                : 
+CATCH                : 
+CLASS                : 
+COLON                : 
+COMMA                : 
+CONTINUE             : 
+DIVIDE               : 5
+DIVIDEEQUAL          : 
+DOT                  : 
+ECHO                 : 
+ELSE                 : 7
+EQUALS               : 1
+FLOAT                : 
+FOR                  : 
+FOREACH              : 
+FUNCTION             : 
+GREATER              : 
+GREATEREQUAL         : 
+IDENTIFIER           : 1
+IF                   : 7
+LBRACE               : 
+LBRACKET             : 
+LESS                 : 
+LESSEQUAL            : 
+LPAREN               : 7
+MINUS                : 3
+MINUSEQUAL           : 
+MINUSMINUS           : 
+MULTI_LINE_COMMENT   : 
+NEW                  : 
+NOT                  : 
+NOTEQUAL             : 
+NUMBER               : 6
+OR                   : 
+OROR                 : 
+PLUS                 : 2
+PLUSEQUAL            : 
+PLUSPLUS             : 
+PRINT                : 
+PRIVATE              : 
+PROTECTED            : 
+PUBLIC               : 
+QUESTION             : 
+RBRACE               : 
+RBRACKET             : 
+RETURN               : 
+RPAREN               : 7
+SEMICOLON            : 
+SINGLE_LINE_COMMENT  : 
+STATIC               : 
+STRING               : 
+THROW                : 
+TIMES                : 4
+TIMESEQUAL           : 
+TRY                  : 
+VAR                  : 
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 8 0
+expression           : 1 2 2 3 3 4 4 5 5 7 10
+if_else              : 9
+statement            : 7 7
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . assignment
+    (1) assignment -> . IDENTIFIER EQUALS expression
+
+    IDENTIFIER      shift and go to state 2
+
+    assignment                     shift and go to state 1
+
+state 1
+
+    (0) S' -> assignment .
+
+
+
+state 2
+
+    (1) assignment -> IDENTIFIER . EQUALS expression
+
+    EQUALS          shift and go to state 3
+
+
+state 3
+
+    (1) assignment -> IDENTIFIER EQUALS . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+
+    NUMBER          shift and go to state 5
+
+    expression                     shift and go to state 4
+
+state 4
+
+    (1) assignment -> IDENTIFIER EQUALS expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+
+    $end            reduce using rule 1 (assignment -> IDENTIFIER EQUALS expression .)
+    PLUS            shift and go to state 6
+    MINUS           shift and go to state 7
+    TIMES           shift and go to state 8
+    DIVIDE          shift and go to state 9
+
+
+state 5
+
+    (6) expression -> NUMBER .
+
+    PLUS            reduce using rule 6 (expression -> NUMBER .)
+    MINUS           reduce using rule 6 (expression -> NUMBER .)
+    TIMES           reduce using rule 6 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 6 (expression -> NUMBER .)
+    $end            reduce using rule 6 (expression -> NUMBER .)
+
+
+state 6
+
+    (2) expression -> expression PLUS . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+
+    NUMBER          shift and go to state 5
+
+    expression                     shift and go to state 10
+
+state 7
+
+    (3) expression -> expression MINUS . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+
+    NUMBER          shift and go to state 5
+
+    expression                     shift and go to state 11
+
+state 8
+
+    (4) expression -> expression TIMES . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+
+    NUMBER          shift and go to state 5
+
+    expression                     shift and go to state 12
+
+state 9
+
+    (5) expression -> expression DIVIDE . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+
+    NUMBER          shift and go to state 5
+
+    expression                     shift and go to state 13
+
+state 10
+
+    (2) expression -> expression PLUS expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    $end            reduce using rule 2 (expression -> expression PLUS expression .)
+    PLUS            shift and go to state 6
+    MINUS           shift and go to state 7
+    TIMES           shift and go to state 8
+    DIVIDE          shift and go to state 9
+
+  ! PLUS            [ reduce using rule 2 (expression -> expression PLUS expression .) ]
+  ! MINUS           [ reduce using rule 2 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 2 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 2 (expression -> expression PLUS expression .) ]
+
+
+state 11
+
+    (3) expression -> expression MINUS expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    $end            reduce using rule 3 (expression -> expression MINUS expression .)
+    PLUS            shift and go to state 6
+    MINUS           shift and go to state 7
+    TIMES           shift and go to state 8
+    DIVIDE          shift and go to state 9
+
+  ! PLUS            [ reduce using rule 3 (expression -> expression MINUS expression .) ]
+  ! MINUS           [ reduce using rule 3 (expression -> expression MINUS expression .) ]
+  ! TIMES           [ reduce using rule 3 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 3 (expression -> expression MINUS expression .) ]
+
+
+state 12
+
+    (4) expression -> expression TIMES expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    $end            reduce using rule 4 (expression -> expression TIMES expression .)
+    PLUS            shift and go to state 6
+    MINUS           shift and go to state 7
+    TIMES           shift and go to state 8
+    DIVIDE          shift and go to state 9
+
+  ! PLUS            [ reduce using rule 4 (expression -> expression TIMES expression .) ]
+  ! MINUS           [ reduce using rule 4 (expression -> expression TIMES expression .) ]
+  ! TIMES           [ reduce using rule 4 (expression -> expression TIMES expression .) ]
+  ! DIVIDE          [ reduce using rule 4 (expression -> expression TIMES expression .) ]
+
+
+state 13
+
+    (5) expression -> expression DIVIDE expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    $end            reduce using rule 5 (expression -> expression DIVIDE expression .)
+    PLUS            shift and go to state 6
+    MINUS           shift and go to state 7
+    TIMES           shift and go to state 8
+    DIVIDE          shift and go to state 9
+
+  ! PLUS            [ reduce using rule 5 (expression -> expression DIVIDE expression .) ]
+  ! MINUS           [ reduce using rule 5 (expression -> expression DIVIDE expression .) ]
+  ! TIMES           [ reduce using rule 5 (expression -> expression DIVIDE expression .) ]
+  ! DIVIDE          [ reduce using rule 5 (expression -> expression DIVIDE expression .) ]
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 10 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 10 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 10 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 10 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 11 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 11 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 11 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 11 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 12 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 12 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 12 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 12 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 13 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 13 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 13 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 13 resolved as shift

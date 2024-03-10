@@ -7,16 +7,22 @@ class Lexer {
 
   tokenize() {
     const tokenSpecs = [
+      ["ONE_LINE_COMMENT", /^\/\/[^\n]*\n?/, true],
+      ["MULTI_LINE_COMMENT", /^\/\*[\s\S]*?\*\//, true],
+      ["PHP_TAG_OPEN", /^<\?php\b/, true], // Agregar 'true' para ignorar este token
+      ["PHP_TAG_CLOSE", /\?>/, true],
       ["NUMBER", /^\d+/],
       ["STRING", /^"[^"]*"/],
-      ["WHITESPACE", /^\s+/, true], // Ignorado
       ["KEYWORD", /^(if|else|return|function)\b/],
-      ["IDENTIFIER", /^[a-zA-Z_]\w*/],
+      ["IDENTIFIER", /^[a-zA-Z_][a-zA-Z0-9_]*/],
       ["OPERATOR", /^[+*/=-]/],
-
-      ["SEMICOLON", /^;/], // Para el punto y coma
-      ["LPAREN", /^\(/], // Para el paréntesis abierto
-      ["RPAREN", /^\)/], // Para el paréntesis cerrado
+      ["SEMICOLON", /^;/],
+      ["LPAREN", /^\(/],
+      ["RPAREN", /^\)/],
+      ["COMPARISON_OPERATOR", /^(==|!=|<=|>=|<|>)/],
+      ["COMMA", /^,/],
+      ["DOT", /^\./],
+      ["WHITESPACE", /^\s+/, true],
     ];
 
     let m;
@@ -28,7 +34,7 @@ class Lexer {
           if (!ignore) {
             this.tokens.push({ type, value: m[0] });
           }
-          this.input = this.input.slice(m[0].length); // Actualiza la entrada
+          this.input = this.input.slice(m[0].length);
           matchFound = true;
           break;
         }

@@ -181,13 +181,12 @@ class Parser {
     }
   
     // Implementar lógica para verificar la compatibilidad de tipos según el operador
-    // Por ejemplo, para la operación '+':
     if (operator === '+') {
       return (
         (leftType === 'number' && rightType === 'number') ||
         (leftType === 'string' && rightType === 'string') ||
-        (leftType === 'function' && rightType === 'number') || // Permitir suma de función con número
-        (leftType === 'number' && rightType === 'function') // Permitir suma de número con función
+        (leftType === 'function' && rightType === 'number') || 
+        (leftType === 'number' && rightType === 'function') 
       );
     }
     // Agregar reglas para otros operadores

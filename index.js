@@ -1,3 +1,4 @@
+/*
 const fs = require('fs');
 const Lexer = require('./lexer');
 const Parser = require('./parser');
@@ -16,9 +17,9 @@ const codeGenerator = new CodeGenerator(intermediateCode);
 const objectCode = codeGenerator.generate();
 
 console.log(objectCode.join('\n'));
+*/
 
 
-/*
 const fs = require('fs');
 const Lexer = require('./lexer');
 const Parser = require('./parser');
@@ -33,4 +34,3 @@ const generator = new IntermediateCodeGenerator(ast);
 const intermediateCode = generator.generate();
 
 console.log(intermediateCode.join('\n'));
-*/

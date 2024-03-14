@@ -1,3 +1,4 @@
+//codigo en tres direcciones
 class IntermediateCodeGenerator {
     constructor(ast) {
       this.ast = ast;
@@ -22,7 +23,7 @@ class IntermediateCodeGenerator {
             return node.value;
           case 'VariableReference':
             return node.name;
-          // Agrega más casos según los tipos de nodos que tengas en tu AST
+          //add more cases
           default:
             throw new Error(`Tipo de nodo no soportado: ${node.type}`);
         }

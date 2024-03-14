@@ -14,7 +14,7 @@ class CodeGenerator {
             this.objectCode.push(`add eax, ${operand2}`);
             this.objectCode.push(`mov ${target}, eax`);
           }
-          // Agregar mas casos segun las operaciones que soporte el codigo intermedio
+          //add more cases
         }
         return this.objectCode;
       }
